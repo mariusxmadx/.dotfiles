@@ -22,7 +22,7 @@ set $terminal terminator
 font pango:Inconsolata Regular 13
 
 # enable window icons for all windows
-# for_window [all] title_window_icon on
+for_window [all] title_window_icon on
 
 # enable window icons for all windows with extra horizontal padding
 for_window [all] title_window_icon padding 5px
