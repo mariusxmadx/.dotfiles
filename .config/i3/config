@@ -19,13 +19,16 @@ set $terminal terminator
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 # font pango:DejaVu Sans Mono 8
 
-font pango:Inconsolata Regular 13
+font pango:Source Code Pro 13
+# font pango:Inconsolata, Icons 13
 
 # enable window icons for all windows
 for_window [all] title_window_icon on
 
 # enable window icons for all windows with extra horizontal padding
 for_window [all] title_window_icon padding 5px
+
+for_window [class="Yad"] floating enable
 
 # title_align left|center|right
 title_align left
@@ -76,7 +79,7 @@ exec --no-startup-id blueman-applet
 
 # misc
 exec --no-startup-id xfce4-clipman
-
+exec --no-startup-id xfce4-power-manager
 
 # print
 bindsym Print exec --no-startup-id scrot
@@ -84,12 +87,22 @@ bindsym $mod+Print --release exec --no-startup-id scrot -w
 bindsym $mod+Shift+Print --release exec --no-startup-id scrot -s
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+#------------------------------------------------------------------
+# Sreen brightness controls
+# bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 # increase screen brightness
+# bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen brightness
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# # Use pactl to adjust volume in PulseAudio.
+# set $refresh_i3status killall -SIGUSR1 i3status
+# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+# bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 #############################################################################################################################
 
@@ -119,7 +132,8 @@ bindsym $mod+Shift+q kill
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun -show-icons"
 # bindsym $mod+d exec --no-startup-id "rofi -modi window,drun,run -show drun"
-bindsym $mod+x exec "rofi -modi window,drun,run -show drun -show-icons"
+# bindsym $mod+x exec "rofi -modi window,drun,run -show drun -show-icons"
+bindsym $mod+x exec --no-startup-id rofi -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -show-icons -columns 3 -font 'Source Code Pro 11'
 # bindcode $mod+40 exec "rofi -combi-modi window#drun#run -show combi -show-icons"
 
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -296,8 +310,8 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
-# bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 
 #############################################################################################################################
 
@@ -332,12 +346,12 @@ client.background       #ffffff
 
 bar {
     position top
-    status_command i3status
+    status_command i3blocks
     
     colors {
         background #222222
         statusline #E5E9F0
-        separator  #E5E9F0
+        separator  #222222
 
         ################### border  backgr  text
 
@@ -349,4 +363,3 @@ bar {
     }
 }
 
-#############################################################################################################################
