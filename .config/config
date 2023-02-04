@@ -1,0 +1,154 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+# Change $SCRIPT_DIR to the location of your scripts!
+# command=$SCRIPT_DIR/$BLOCK_NAME
+command=~/.config/i3blocks/$BLOCK_NAME/$BLOCK_NAME
+
+separator_block_width=15
+separator="::"
+markup=pango
+
+# [spotify]
+# min_width=Buttom=?
+# # command=$SCRIPT_DIR/spotifyd_dbus $buttom
+# color=#00FFB3
+# interval=10
+
+[temperature]
+# command=$SCRIPT_DIR/temperature
+label= 
+interval=10
+T_WARN=70
+T_CRIT=90
+#SENSOR_CHIP=""
+
+[cpu_usage]
+# command=$SCRIPT_DIR/cpu_usage
+interval=10
+LABEL= 
+#min_width=CPU: 100.00%
+#T_WARN=50
+#T_CRIT=80
+DECIMALS=2
+COLOR_NORMAL=#5E81AC
+COLOR_WARN=#5E81AC
+COLOR_CRIT=#5E81AC
+
+[memory]
+# command=$SCRIPT_DIR/memory
+label= 
+interval=30
+color=#A3BE8C
+
+[disk]
+# command=$SCRIPT_DIR/disk
+LABEL= 
+#DIR=/mnt/data
+interval=30
+color=#D08770
+
+[backlight]
+# command=$SCRIPT_DIR/backlight
+label=☀ 
+interval=20
+#STEP_SIZE=5
+#USE_SUDO=0
+color=#EBCB8B
+
+[volume]
+# command=$SCRIPT_DIR/volume
+LABEL= 
+interval=once
+signal=10
+STEP=5%
+#MIXER=[determined automatically]
+#SCONTROL=[determined automatically]
+#NATURAL_MAPPING=0
+color=#B48EAD
+
+[battery]
+# command=$SCRIPT_DIR/battery
+interval=30
+LABEL=🔋 
+#BAT_NUMBER=0
+color=#8FBCBB
+
+[calendar]
+# command=$SCRIPT_DIR/calendar
+interval=1
+LABEL=  
+DATEFMT=+%H:%M 
+# SHORTFMT=+%H:%M:%S
+# DATEFMT= %d-%m-%Y  %H:%M
+HEIGHT=180
+WIDTH=220
+color=#EBCB8B
+
+[shutdown_menu]
+full_text= 
+# If you are using FontAwesome, we recommend the power-off icon:
+# http://fontawesome.io/icon/power-off/
+# command=$SCRIPT_DIR/shutdown_menu
+FG_COLOR=#BF616A
+BG_COLOR=#111111
+HLFG_COLOR=#111111
+HLBG_COLOR=#BF616A
+BORDER_COLOR=#222222
+ROFI_TEXT=Menu:
+ROFI_OPTIONS=-width 11 -location 3 -hide-scrollbar -bw 2
+ZENITY_TITLE=Menu
+ZENITY_TEXT=Action:
+ZENITY_OPTIONS=--column= --hide-header
+ENABLE_CONFIRMATIONS=true
+LAUNCHER=rofi
+LOCKSCRIPT=i3lock --color=${BG_COLOR#"#"}
+color=#BF616A
+
+[keyindicator]
+# command=$SCRIPT_DIR/keyindicator
+#Allowed keys are CAPS and NUM
+KEY=CAPS
+markup=pango
+interval=once
+signal=11
+TEXT_ON=CapsLockOn
+TEXT_OFF=CapsLockOff
+COLOR_ON=#00FF00
+COLOR_OFF=#222222
+#BG_COLOR_ON=
+#BG_COLOR_OFF=
+ 
+[keyindicator]
+# command=$SCRIPT_DIR/keyindicator
+KEY=NUM
+markup=pango
+interval=once
+signal=11
+TEXT_ON=NumLockOn
+TEXT_OFF=NumLockOff
+COLOR_ON=#00FF00
+HIDE_WHEN_OFF=1
